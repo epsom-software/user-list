@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState, User } from "../types";
+import * as actions from "./actions";
 
 import Avatar from "@material-ui/core/Avatar";
 import Grid from "@material-ui/core/Grid";
@@ -10,7 +11,7 @@ import { withStyles } from "@material-ui/core/styles";
 const UserList = ({ classes }: Props) => {
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch({ type: "USERS/USER_LIST" });
+    dispatch({ type: actions.USER_LIST });
   }, [dispatch]);
   const users = useSelector<RootState, User[] | undefined>(
     (state) => state.userReducer.users

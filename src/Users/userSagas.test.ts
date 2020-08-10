@@ -1,4 +1,5 @@
 import { Response, User } from "./userTypes";
+import * as actions from "./actions";
 import { call, put, takeEvery } from "redux-saga/effects";
 import axios from "axios";
 import {
@@ -26,7 +27,7 @@ describe("userList", () => {
     const response: Response<User[]> = { data: { data: mockUsers } };
 
     expect(iterator.next(response).value).toEqual(
-      put({ type: "USERS/GET_USERS_SUCCESS", data: mockUsers })
+      put({ type: actions.GET_USERS_SUCCESS, data: mockUsers })
     );
   });
 
@@ -34,7 +35,7 @@ describe("userList", () => {
     const iterator = userList();
     iterator.next();
     expect(iterator.throw("error").value).toEqual(
-      put({ type: "USERS/GET_USERS_FAIL", error: "error" })
+      put({ type: actions.GET_USERS_FAIL, error: "error" })
     );
   });
 });
@@ -51,10 +52,10 @@ describe("editUser", () => {
     const response: Response<User> = { data: { data: mockUser } };
 
     expect(iterator.next(response).value).toEqual(
-      put({ type: "USERS/GET_USER_SUCCESS", data: mockUser })
+      put({ type: actions.GET_USER_SUCCESS, data: mockUser })
     );
     expect(iterator.next().value).toEqual(
-      takeEvery("USERS/UPDATE_USER", updateUser)
+      takeEvery(actions.UPDATE_USER, updateUser)
     );
   });
 });
@@ -69,7 +70,7 @@ describe("updateUser", () => {
     );
 
     expect(iterator.next().value).toEqual(
-      put({ type: "USERS/UPDATE_USER_SUCCESS" })
+      put({ type: actions.UPDATE_USER_SUCCESS })
     );
   });
 });

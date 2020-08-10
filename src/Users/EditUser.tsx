@@ -4,14 +4,15 @@ import { Formik, Form } from "formik";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import { RootState, User } from "../types";
+import * as actions from "./actions";
 
 const EditUser = (props: Props) => {
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch({ type: "USERS/EDIT_USER", data: props.match.params.userId });
+    dispatch({ type: actions.EDIT_USER, data: props.match.params.userId });
   }, [dispatch, props.match.params.userId]);
   const updateUser = useCallback(
-    (user: User) => dispatch({ type: "USERS/UPDATE_USER", data: user }),
+    (user: User) => dispatch({ type: actions.UPDATE_USER, data: user }),
     [dispatch]
   );
 

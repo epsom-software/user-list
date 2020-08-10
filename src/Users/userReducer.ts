@@ -1,4 +1,5 @@
 import { UserState, UserAction, User } from "./userTypes";
+import * as actions from "./actions";
 
 export const userReducer = (
   state: UserState = {
@@ -7,29 +8,29 @@ export const userReducer = (
   action: UserAction
 ): UserState => {
   switch (action.type) {
-    case "USERS/EDIT_USER":
+    case actions.EDIT_USER:
       return {
         ...state,
         user: undefined,
         isSubmitting: false,
       };
-    case "USERS/GET_USERS_SUCCESS":
+    case actions.GET_USERS_SUCCESS:
       return {
         ...state,
         users: action.data as User[],
       };
-    case "USERS/GET_USER_SUCCESS":
+    case actions.GET_USER_SUCCESS:
       return {
         ...state,
         user: action.data as User,
       };
-    case "USERS/UPDATE_USER":
+    case actions.UPDATE_USER:
       return {
         ...state,
         isSubmitting: true,
       };
-    case "USERS/UPDATE_USER_FAIL":
-    case "USERS/UPDATE_USER_SUCCESS":
+    case actions.UPDATE_USER_FAIL:
+    case actions.UPDATE_USER_SUCCESS:
       return {
         ...state,
         isSubmitting: false,
